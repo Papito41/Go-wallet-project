@@ -2,26 +2,42 @@ package main
 
 import "fmt"
 
-type balance struct {
-	amount float64
+// 1. THE BLUEPRINT (Struct)
+type Wallet struct {
+	Balance float64
+	History []float64 // The Slice (The Train)
 }
 
-// Move this OUTSIDE of main
-func addMoney(b *float64, amount float64) {
-	if amount > 0 {
-		*b += amount
+// 2. THE DEPOSIT TOOL (Pointer Receiver)
+func (w *Wallet) Deposit(amount float64) {
+	w.Balance = w.Balance + amount
+	w.History = append(w.History, amount) // Adding a "car" to the train
+	fmt.Printf("Deposited: $%.2f\n", amount)
+}
+
+// 3. THE WITHDRAW TOOL (Logic + Pointer)
+func (w *Wallet) Withdraw(amount float64) {
+	if amount <= w.Balance {
+		w.Balance = w.Balance - amount
+		w.History = append(w.History, -amount) // Record as a negative
+		fmt.Printf("Withdrew: $%.2f\n", amount)
 	} else {
-		fmt.Println("Error: Cannot deposit zero or negative money!")
+		fmt.Println("Error: Insufficient funds!")
 	}
 }
 
+// 4. THE EXECUTION
 func main() {
-	myWallet := balance{amount: 100.00}
+	// Initialize the wallet
+	myWallet := Wallet{Balance: 100.00}
 
-	fmt.Println("Initial Balance:", myWallet.amount)
+	// Perform actions
+	myWallet.Deposit(50.00)
+	myWallet.Withdraw(30.00)
+	myWallet.Withdraw(200.00) // This will trigger the "if" error
 
-	// Use the pointer to change the original amount
-	addMoney(&myWallet.amount, 50.50)
-
-	fmt.Println("New Balance:", myWallet.amount)
+	// See the results
+	fmt.Println("---------------------------")
+	fmt.Printf("Final Balance: $%.2f\n", myWallet.Balance)
+	fmt.Println("Full Statement:", myWallet.History)
 }

@@ -1,12 +1,20 @@
 # Go Wallet Project
 
-A simple Go application demonstrating the use of **Structs** and **Pointers** to manage a digital wallet.
+A professional Go application demonstrating core backend engineering concepts. This project was built to master memory management and data structures in Golang.
 
-## Features
-- **Memory Management**: Uses pointers to update the balance directly in memory.
-- **Data Grouping**: Uses a struct to organize wallet data.
-- **Safety**: Includes checks to prevent negative deposits.
+## 🚀 Features
+- **Custom Structs**: Organized data using a `Wallet` blueprint.
+- **Pointer Receivers**: Efficiently modified original memory states without unnecessary copying.
+- **Transaction History**: Implemented dynamic data storage using Slices and the `append` function.
+- **Business Logic**: Conditional checks for withdrawals (Insufficient funds handling).
 
-## How to Run
-```bash
-go run main.go
+## 🛠 Tech Stack
+- **Language**: Go (Golang)
+- **Concepts**: Structs, Pointers, Receivers, Slices, Flow Control.
+
+## 📦 How to Run
+1. Make sure you have Go installed.
+2. Clone this repository.
+3. Run the following command in your terminal:
+   ```bash
+   go run main.go
